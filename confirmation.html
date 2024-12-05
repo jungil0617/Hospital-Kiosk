@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="confirmation.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <title>진료 예약 확인</title>
+</head>
+<body>
+    <header>
+        <img src="assets/basic_logo.gif" alt="단국대학교병원 로고">
+    </header>
+
+    <main>
+        <div class="container">
+            <p> 이름 : <span id="patient-name"></span> 님 </p>
+            <p> 진료과 : <span id="selected-department"></span> </p>
+            <p> 대기 순서 : <span id="queue-position"></span> 번</p>
+            <p> 예상 대기 시간 : <span id="waiting-time"></span> 분 </p>
+    
+            <button class="button"> 확인 </button>
+        </div>
+    </main>
+
+    <footer>
+        무인 안내 데스크
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const reservations = JSON.parse(localStorage.getItem("reservations")) || [];
+            if (reservations.length === 0) {
+                alert("예약 정보가 없습니다.");
+                window.location.href = "department.html";
+                return;
+            }
+
+            // 최근 예약 정보 가져오기
+            const latestReservation = reservations[reservations.length - 1];
+
+            // 대기 시간 계산
+            const waitingTimes = {
+                "외과": 20,
+                "신경과": 20,
+                "피부과": 20,
+                "성형외과": 25,
+                "외상학과": 30,
+                "산부인과": 25,
+                "이비인후과": 20,
+                "정신건강의학과": 20,
+            };
+
+            const waitingTime = waitingTimes[latestReservation.department] || 0;
+
+            // 데이터를 페이지에 출력
+            document.getElementById("patient-name").textContent = latestReservation.name || "이름 없음";
+            document.getElementById("selected-department").textContent = latestReservation.department || "진료과 없음";
+            document.getElementById("waiting-time").textContent = waitingTime;
+            document.getElementById("queue-position").textContent = latestReservation.queuePosition || "정보 없음";
+        });
+    </script>
+
+</body>
+</html>

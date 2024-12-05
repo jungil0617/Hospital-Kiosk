@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="department.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <title>진료과 선택</title>
+</head>
+<body>
+    <header>
+        <img src="assets/basic_logo.gif" alt="단국대학교병원 로고">
+    </header>
+    <div class="button-container">
+        <button class="button"> 외과 </button>
+        <button class="button"> 신경과 </button>
+        <button class="button"> 피부과 </button>
+        <button class="button"> 성형외과 </button>
+        <button class="button"> 외상학과 </button>
+        <button class="button"> 산부인과 </button>
+        <button class="button"> 이비인후과 </button>
+        <button class="button"> 정신건강의학과 </button>
+    </div>
+
+    <footer>
+        무인 안내 데스크
+    </footer> 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const buttons = document.querySelectorAll(".button");
+
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const selectedDepartment = this.textContent.trim();
+
+                    const name = localStorage.getItem("name");
+                    const ssn = localStorage.getItem("ssn");
+
+                    if (!name || !ssn) {
+                        alert("이름과 주민등록번호를 입력한 후 예약해주세요.");
+                        return;
+                    }
+
+                    const reservations = JSON.parse(localStorage.getItem("reservations")) || [];
+                    const newReservation = {
+                        name: name,
+                        ssn: ssn,
+                        department: selectedDepartment,
+                        queuePosition: reservations.filter(r => r.department === selectedDepartment).length + 3
+                    };
+
+                    reservations.push(newReservation);
+                    localStorage.setItem("reservations", JSON.stringify(reservations));
+
+                    window.location.href = "confirmation.html";
+                });
+            });
+        });
+    </script>
+</body>
+</html>

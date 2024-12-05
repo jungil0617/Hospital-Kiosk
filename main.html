@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <title>키오스크 화면</title>
+</head>
+<body>
+    <header>
+        <img src="assets/basic_logo.gif" alt="단국대학교병원 로고">
+    </header>
+    <main>
+        <div class="button-container">
+            <button class="button" onclick="bookAppointment()"><img src="assets/medical_services.png" class="icon">진료 예약</button>
+            <button class="button" onclick="alert('네 번째 버튼 클릭!')"><img src="assets/receipt.png" class="icon">진료비 결제</button>
+            <button class="button" onclick="floor()"><img src="assets/map.png" class="icon">병원 시설 안내</button>
+            <button class="button" onclick="alert('두 번째 버튼 클릭!')"><img src="assets/calendar.png" class="icon">진료시간표</button>
+            <button class="emergency" id="emergencyButton">응급 상황 알림</button>
+        </div>
+    </main>
+    <footer>
+        무인 안내 데스크
+    </footer>
+
+    <script>
+        // 진료 예약 페이지
+        function bookAppointment() {
+            window.location.href = 'appointment.html';
+        }  
+
+        // 층별 페이지
+        function floor() {
+            window.location.href = 'floor.html';
+        }
+
+        // 응급 상황 알림
+        document.getElementById('emergencyButton').addEventListener('click', function () {
+        alert("응급 상황 알림이 성공적으로 전송되었습니다!");
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            localStorage.clear(); // 로컬 스토리지 전체 삭제
+        });
+
+    </script>
+</body>
+</html>

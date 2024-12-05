@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="appointment.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <script src="hangul.js" type="text/javascript"></script>
+    <script src="customKeyboard.js"></script>
+    <script src="script.js"></script>
+    <title>진료 예약</title>
+</head>
+<body>
+    <header>
+        <img src="assets/basic_logo.gif" alt="단국대학교병원 로고">
+    </header>
+    <main>
+        <form>
+            <div>
+                <label for="name">이름</label>
+                <input type="text" id="name" name="name" autocomplete="off" required>
+            </div>
+        
+            <div>
+                <label for="ssn1">주민등록번호</label>
+                <div class="ssn-container">
+                    <input type="text" id="ssn1" name="ssn1" autocomplete="off" pattern="[0-9]{6}" title="생년월일 6자리를 입력해주세요 (예: 900101)" required>
+                    <input type="password" id="ssn2" name="ssn2" autocomplete="off" pattern="[1-4][0-9]{6}" title="뒷자리 7자리를 입력해주세요" required>
+                </div>
+            </div>
+            
+            <button class="back" onclick="goBack()"> 뒤로가기 </button>
+            <button type="button" id="submit-btn">예약하기</button>
+
+            <div id="keyboard-zone"> </div>
+        </form>
+    </main>
+
+    <footer>
+        무인 안내 데스크
+    </footer>
+
+    <script>
+        function goBack() {
+            window.location.href = 'main.html';
+        };
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // 가상 키보드 생성
+            const keyboardZone = document.getElementById("keyboard-zone");
+            const inputFields = document.querySelectorAll("#name, #ssn1, #ssn2");
+
+            if (typeof customKeyboard === "function") {
+                const keyboard = new customKeyboard(
+                    keyboardZone,
+                    null, // 현재 입력 필드는 클릭 시 설정
+                    function (text) {
+                        const activeInput = keyboard.getText();
+                        if (activeInput) {
+                            activeInput.value = text; // 입력 필드에 가상 키보드 값 반영
+                        }
+                    },
+                    function () {
+                        console.log("ESC 키 눌림");
+                    },
+                    function (text) {
+                        console.log("Enter 입력 완료: ", text);
+                        alert("입력 완료: " + text);
+                    },
+                    null
+                );
+
+                // 각 입력 필드에 클릭 이벤트 추가
+                inputFields.forEach(input => {
+                    input.addEventListener("click", function () {
+                        keyboard.setInput(this); // 현재 입력 필드 설정
+                    });
+                });
+            } else {
+                console.error("customKeyboard 생성자 함수가 정의되지 않았습니다.");
+            }
+
+            // 예약하기 버튼 클릭 이벤트
+            document.getElementById("submit-btn").addEventListener("click", function () {
+                const name = document.getElementById("name").value.trim();
+                const ssn1 = document.getElementById("ssn1").value.trim();
+                const ssn2 = document.getElementById("ssn2").value.trim();
+
+                // 주민등록번호 합치기
+                const ssn = `${ssn1}${ssn2}`;
+
+                // 로컬 스토리지에 데이터 저장
+                localStorage.setItem("name", name);
+                localStorage.setItem("ssn", ssn);
+
+                // 다음 페이지로 이동
+                window.location.href = "department.html";
+            });
+        });
+    </script>
+
+</body>
+</html>

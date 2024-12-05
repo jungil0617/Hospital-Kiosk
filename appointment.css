@@ -1,0 +1,142 @@
+/* 전체 스타일 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans KR", serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    height: 100vh;
+    max-width: 100vw;
+}
+
+/* 상단 헤더 */
+header {
+    width: 100%;
+    background-color: white;
+    color: white;
+    text-align: center;
+    
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header img {
+    max-height: 60px; /* 이미지 높이 조절 */
+    margin-right: 10px; /* 이미지와 텍스트 간격 */
+}
+
+/* 메인 콘텐츠 영역 */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 하단 푸터 */
+footer {
+    width: 420px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #333;
+    color: white;
+    font-size: 1.2rem;
+}
+
+
+/* 입력 폼 전체 설정 */
+form {
+    width: 100%;              /* 부모 요소의 너비에 맞춤 */
+    max-width: 400px;         /* 폼의 최대 너비 */
+    margin: 0 auto;           /* 중앙 정렬 */
+    text-align: left;         /* 텍스트 정렬 */
+    position: relative;       /* 위치를 조정하기 위해 relative 설정 */
+    top: -130px;               /* 화면 중앙에서 위로 50px 이동 */
+}
+
+/* 라벨 스타일 */
+form label {
+    display: block;           /* 블록 요소로 표시 */
+    font-size: 20px;          /* 폰트 크기 */
+    margin-bottom: 20px;       /* 라벨과 입력 필드 간격 */
+    color: #555;              /* 텍스트 색상 */
+}
+
+/* 입력 필드 스타일 */
+form input {
+    width: 92%;              /* 필드의 너비 */
+    padding: 15px;            /* 내부 여백 */
+    margin-bottom: 15px;      /* 입력 필드 사이 간격 */
+    border: 1px solid #ccc;   /* 테두리 색상 */
+    border-radius: 5px;       /* 둥근 모서리 */
+    font-size: 20px;          /* 폰트 크기 */
+    text-align: center;
+}
+
+/* 버튼 스타일 */
+form button {
+    width: 70%;              /* 버튼 너비 */
+    height: 55px;
+    padding: 10px;            /* 버튼 내부 여백 */
+    background-color: #004898; /* 기본 배경색 */
+    color: white;             /* 텍스트 색상 */
+    border: none;             /* 테두리 제거 */
+    border-radius: 5px;       /* 둥근 모서리 */
+    font-size: 18px;          /* 텍스트 크기 */
+    cursor: pointer;          /* 클릭 가능한 포인터 표시 */
+    transition: background-color 0.3s ease; /* 배경색 변경 효과 */
+}
+
+form button:hover {
+    background-color: #0056b3; /* 버튼 호버 효과 */
+}
+
+/* 주민등록번호 입력 컨테이너 */
+.ssn-container {
+    display: flex;            /* 플렉스 레이아웃 */
+    align-items: center;      /* 수직 가운데 정렬 */
+    justify-content: center;  /* 가로 가운데 정렬 */
+    gap: 20px;                /* 필드와 대시(-) 사이 간격 */
+    margin-bottom: 10px;      /* 아래 요소와의 간격 */
+}
+
+/* 주민등록번호 입력 필드 */
+.ssn-container input {
+    width: 100%;             /* 필드의 고정 가로 크기 */
+    padding: 15px;             /* 내부 여백 */
+    border: 1px solid #ccc;   /* 테두리 색상 */
+    border-radius: 5px;       /* 둥근 모서리 */
+    font-size: 20px;          /* 폰트 크기 */
+    text-align: center;       /* 입력 텍스트 중앙 정렬 */
+}
+
+
+#keyboard-zone {
+    position: fixed; /* 화면에 고정되어 스크롤 시에도 항상 보이도록 설정 */
+    bottom: 7%; /* 화면 하단에서 6.5% 위로 배치 */
+    left: 50%; /* 화면의 가로축 중앙에 배치 */
+    transform: translateX(-50%); /* 너비의 절반만큼 왼쪽으로 이동하여 정확히 가운데 정렬 */
+    width: 420px; /* 키보드 영역의 너비를 화면 너비의 30%로 설정 */
+    height: 35vh; 
+    background-color: white; /* 키보드 배경색을 연한 회색으로 설정 */
+    /* border-top: 2px solid #ccc; /* 상단에 구분선을 추가하여 키보드 영역 강조 */
+    display: block; /* 키보드 내부 요소를 플렉스 박스로 정렬 */
+    justify-content: center; /* 내부 요소를 가로 방향으로 중앙 정렬 */
+    align-items: center; /* 내부 요소를 세로 방향으로 중앙 정렬 */
+    z-index: 1000; /* 키보드가 다른 요소 위에 표시되도록 높은 우선순위 설정 */
+}
+
+#keyboard-zone button {
+    color: blue;
+
+}
+
+.back {
+    width: 25%;
+    margin-right: 4%;
+}
