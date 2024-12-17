@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="payment-confirmation.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <title>결제 페이지</title>
+</head>
+<body>
+    <header>
+        <img src="assets/basic_logo.gif" alt="단국대학교병원 로고">
+    </header>
+    <main>
+        <div class="certificate">
+            <h2> 진료 내역 </h2>
+            <p>이름: <span id="name"></span></p>
+            <p>진료과: <span id="department"></span></p>
+            <p>결제 금액: <span id="amount"></span></p>
+        </div>
+
+        <button class="button" onclick="goBack()"> 결제하기 </button>
+    </main>
+
+    <footer>
+        무인 안내 데스크
+    </footer>
+
+    <script>
+        function goBack() {
+            window.location.href = 'main.html';
+        };
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // 로컬 스토리지에서 paymentData 가져오기
+            const storedData = localStorage.getItem("paymentData");
+
+            if (storedData) {
+                // JSON 문자열을 객체로 변환
+                const paymentData = JSON.parse(storedData);
+
+                // 데이터 조회 및 화면에 표시
+                document.getElementById("name").textContent = paymentData.name || "정보 없음";
+                document.getElementById("department").textContent = paymentData.department || "정보 없음";
+                document.getElementById("amount").textContent = paymentData.amount || "정보 없음";
+            } else {
+                // 저장된 데이터가 없을 경우 처리
+                alert("저장된 결제 데이터가 없습니다.");
+            }
+        });
+    </script>
+    
+</body>
+</html>

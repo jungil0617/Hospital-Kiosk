@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=e3c0da53819935fefffdb80e17e19acf"></script>
     <title>단국대학교 병원 층별 지도</title>
     <style>
     </style>
@@ -17,15 +18,17 @@
     </header>
 
     <div class="button-container">
-        <button class="button" onclick="showMap('assets/1.png')">1층</button>
-        <button class="button" onclick="showMap('assets/2.png')">2층</button>
-        <button class="button" onclick="showMap('assets/3.png')">3층</button>
-        <button class="button" onclick="showMap('assets/4.png')">4층</button>
-        <button class="button" onclick="showMap('assets/5.png')">5층</button>
+        <button class="button" onclick="showMap('assets/1.png', this)">1층</button>
+        <button class="button" onclick="showMap('assets/2.png', this)">2층</button>
+        <button class="button" onclick="showMap('assets/3.png', this)">3층</button>
+        <button class="button" onclick="showMap('assets/4.png', this)">4층</button>
+        <button class="button" onclick="showMap('assets/5.png', this)">5층</button>
+        <button class="button" onclick="showKakaoMap(this)">약국</button>
     </div>
 
     <div id="map-container">
-        <img id="map-image" src="1.png" alt="지도">
+        <img id="map-image" src="assets/1.png" alt="지도">
+        <div id="kakao-map"></div>
     </div>
 
     <button class="button2" onclick="goBack()"> 뒤로가기 </button>
@@ -35,30 +38,80 @@
     </footer>
 
     <script>
+        // 버튼 강조 함수
+        function highlightButton(clickedButton) {
+            const buttons = document.querySelectorAll('.button-container .button');
+            buttons.forEach(button => button.classList.remove('selected')); // 모든 버튼의 강조 제거
+            clickedButton.classList.add('selected'); // 클릭된 버튼 강조
+        }
+
+        // 초기 설정
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstButton = document.querySelector('.button-container .button'); // 첫 번째 버튼 (1층 버튼)
+            highlightButton(firstButton); // 첫 번째 버튼 강조
+        });
+
+        // 이미지 맵 표시 함수
+        function showMap(imageFile, clickedButton) {
+            highlightButton(clickedButton); // 버튼 강조
+            const mapImage = document.getElementById('map-image');
+            const kakaoMap = document.getElementById('kakao-map');
+
+            // 이미지 표시, 카카오맵 숨김
+            mapImage.src = imageFile;
+            mapImage.style.display = 'block';
+            kakaoMap.style.display = 'none';
+        }
+
+        // 카카오맵 표시 함수
+        function showKakaoMap(clickedButton) {
+            highlightButton(clickedButton); // 버튼 강조
+            const mapImage = document.getElementById('map-image');
+            const kakaoMap = document.getElementById('kakao-map');
+
+            // 이미지 숨기고 카카오맵 표시
+            mapImage.style.display = 'none';
+            kakaoMap.style.display = 'block';
+
+            // 카카오맵 초기화
+            const mapOption = {
+                center: new kakao.maps.LatLng(36.8419, 127.1723), // 단국대학교 병원 좌표
+                level: 4
+            };
+            const map = new kakao.maps.Map(kakaoMap, mapOption);
+
+            // 병원 좌표를 출발지로 설정
+            const hospitalPosition = new kakao.maps.LatLng(36.8419, 127.1723);
+
+            // 약국 데이터
+            const pharmacies = [
+                { name: '대학약국', lat: 36.8408, lng: 127.1748 },
+                { name: '정문약국', lat: 36.8400, lng: 127.1742 },
+            ];
+
+            // 약국 마커 추가
+            pharmacies.forEach(pharmacy => {
+                const markerPosition = new kakao.maps.LatLng(pharmacy.lat, pharmacy.lng);
+
+                const marker = new kakao.maps.Marker({
+                    map: map,
+                    position: markerPosition
+                });
+
+                const infowindow = new kakao.maps.InfoWindow({
+                    content: `<div style="padding:5px;">${pharmacy.name}</div>`
+                });
+
+                kakao.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(map, marker);
+                });
+            });
+        }
+
         function goBack() {
             window.location.href = 'main.html';
         };
-
-        // 초기 화면 설정
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('.button-container button').classList.add('selected');
-            const mapImage = document.getElementById('map-image');
-            mapImage.src = 'assets/1.png';
-            mapImage.style.display = 'block';
-        });
-
-        function showMap(imageFile) {
-        const mapImage = document.getElementById('map-image');
-        mapImage.src = imageFile;
-        mapImage.style.display = 'block';
-
-        // 모든 버튼에서 선택된 스타일 제거
-        const buttons = document.querySelectorAll('.button-container button');
-        buttons.forEach(button => button.classList.remove('selected'));
-
-        // 클릭된 버튼에 선택된 스타일 추가
-        event.target.classList.add('selected');
-    }
     </script>
+
 </body>
 </html>

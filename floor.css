@@ -83,17 +83,14 @@ button:hover {
 }
 
 #map-container {
-    margin-top: 20px;
-}
-
-#map-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
     margin-bottom: 20px;
     max-width: 100%;
-    height: auto;
+    height: 320px;  /* 초기 높이를 명시적으로 설정 */
+    position: relative;  /* position 설정 추가 */
 }
 
 #map-image {
@@ -101,6 +98,12 @@ button:hover {
     max-height: 320px; /* 최대 높이를 설정하여 비율 유지 */
     width: auto; /* 너비 자동 조정 */
     height: auto; /* 높이 자동 조정 */
+}
+
+#kakao-map {
+    width: 400px;
+    height: 350px;
+    display: none; /* 초기에는 숨김 */
 }
 
 .button2 {

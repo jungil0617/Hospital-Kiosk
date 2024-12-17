@@ -36,7 +36,7 @@ header img {
 
 /* 메인 콘텐츠 영역 */
 main {
-    flex: 1;
+    flex: 1 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,6 +88,7 @@ main {
     justify-content: center;
     align-items: center;
     transition: all 0.3s ease;
+    grid-column: span 2; /* 버튼 하나가 그리드 전체 가로 차지 */
 }
 
 /* 하단 푸터 */
@@ -98,4 +99,59 @@ footer {
     background-color: #333;
     color: white;
     font-size: 1.2rem;
+}
+
+table {
+    width: 400px;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+table td img {
+    width: 65px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.schedule {
+    width: 400px; /* 버튼 가로 크기 */
+    height: 50px; /* 버튼 세로 크기 */
+    font-family: "Noto Sans KR", serif;
+    background-color: #004898; /* red, #E60000*/
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.schedule-back {
+    width: 400px; /* 버튼 가로 크기 */
+    height: 50px; /* 버튼 세로 크기 */
+    font-family: "Noto Sans KR", serif;
+    background-color: #004898; /* red, #E60000*/
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
 }

@@ -16,12 +16,16 @@
 
     <main>
         <div class="container">
-            <p> 이름 : <span id="patient-name"></span> 님 </p>
-            <p> 진료과 : <span id="selected-department"></span> </p>
-            <p> 대기 순서 : <span id="queue-position"></span> 번</p>
+            <button class="button"> <span id="selected-department"></span></button>
+
+                <div id="map-container">
+                    <img id="map-image" src="assets/1.png" alt="지도">
+                </div>
+
+            <p> <span id="patient-name"></span> 님, 대기 순서 <span id="queue-position"></span> 번 입니다. </p>
             <p> 예상 대기 시간 : <span id="waiting-time"></span> 분 </p>
     
-            <button class="button"> 확인 </button>
+            <button class="button" onclick="goBack()"> 확인 </button>
         </div>
     </main>
 
@@ -30,6 +34,10 @@
     </footer>
 
     <script>
+        function goBack() {
+            window.location.href = 'main.html';
+        };
+        
         document.addEventListener("DOMContentLoaded", function () {
             const reservations = JSON.parse(localStorage.getItem("reservations")) || [];
             if (reservations.length === 0) {
@@ -40,6 +48,18 @@
 
             // 최근 예약 정보 가져오기
             const latestReservation = reservations[reservations.length - 1];
+
+            // 진료과별 지도 경로 설정
+            const departmentMaps = {
+                "외과": "assets/1.png",
+                "신경과": "assets/2.png",
+                "피부과": "assets/3.png",
+                "성형외과": "assets/2.png",
+                "외상학과": "assets/1.png",
+                "산부인과": "assets/3.png",
+                "이비인후과": "assets/2.png",
+                "정신건강의학과": "assets/1.png",
+            };
 
             // 대기 시간 계산
             const waitingTimes = {
@@ -60,7 +80,13 @@
             document.getElementById("selected-department").textContent = latestReservation.department || "진료과 없음";
             document.getElementById("waiting-time").textContent = waitingTime;
             document.getElementById("queue-position").textContent = latestReservation.queuePosition || "정보 없음";
-        });
+
+            // 지도 이미지 설정
+            const mapSrc = departmentMaps[latestReservation.department] || "assets/1.png";
+            const mapImage = document.getElementById("map-image");
+            mapImage.src = mapSrc;
+            mapImage.alt = `${latestReservation.department} 지도`;
+            });
     </script>
 
 </body>

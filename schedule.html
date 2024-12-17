@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="department.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <title>진료과 선택</title>
+</head>
+<body>
+    <header>
+        <img src="assets/basic_logo.gif" alt="단국대학교병원 로고">
+    </header>
+    <div class="button-container">
+        <button class="button"> 외과 </button>
+        <button class="button"> 신경과 </button>
+        <button class="button"> 피부과 </button>
+        <button class="button"> 성형외과 </button>
+        <button class="button"> 외상학과 </button>
+        <button class="button"> 산부인과 </button>
+        <button class="button"> 이비인후과 </button>
+        <button class="button"> 정신건강의학과 </button>
+    </div>
+
+    <footer>
+        무인 안내 데스크
+    </footer> 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const buttons = document.querySelectorAll(".button");
+    
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const selectedDepartment = this.textContent.trim();
+    
+                    // 진료과별 URL 설정
+                    const departmentUrls = {
+                        "외과": "schedule/외과/외과.html",
+                        "신경과": "schedule/신경과/신경과.html",
+                        "피부과": "schedule/피부과/피부과.html",
+                        "성형외과": "schedule/성형외과/성형외과.html",
+                        "외상학과": "schedule/외상학과/외상학과.html",
+                        "산부인과": "schedule/산부인과/산부인과.html",
+                        "이비인후과": "schedule/이비인후과/이비인후과.html",
+                        "정신건강의학과": "schedule/정신건강의학과/정신건강의학과.html"
+                    };
+    
+                    const targetUrl = departmentUrls[selectedDepartment];
+    
+                    window.location.href = targetUrl;
+                });
+            });
+        });
+    </script>
+    
+</body>
+</html>

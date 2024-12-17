@@ -35,6 +35,8 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column; /* 세로 정렬 */
+    gap: 20px;
 }
 
 /* 하단 푸터 */
@@ -47,21 +49,6 @@ footer {
     font-size: 1.2rem;
 }
 
-.container {
-    text-align: center; /* 텍스트 중앙 정렬 */
-    display: flex; /* 플렉스 컨테이너 */
-    flex-direction: column; /* 세로 정렬 */
-    justify-content: center; /* 콘텐츠 수직 중앙 정렬 */
-    align-items: center; /* 가로 중앙 정렬 */
-    gap: 20px; /* 요소 간 간격 */
-}
-
-.container p {
-    font-size: 1.3rem; /* 텍스트 크기 */
-    margin: 0;
-    padding: 0;
-    color: #333; /* 텍스트 색상 */
-}
 
 .button {
     width: 400px; /* 버튼 가로 크기 */
@@ -80,17 +67,28 @@ footer {
     transition: all 0.3s ease;
 }
 
-#map-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: 100%;
+/* 진단서 카드 스타일 */
+.certificate {
+    width: 350px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: "Noto Sans KR", serif;
+    line-height: 1.6;
     height: auto;
 }
 
-#map-image {
-    max-width: 100%; /* 이미지가 컨테이너의 너비를 넘지 않도록 설정 */
-    max-height: 300px; /* 최대 높이를 설정하여 비율 유지 */
-    width: auto; /* 너비 자동 조정 */
-    height: auto; /* 높이 자동 조정 */
+.certificate h2 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    color: #004898; /* 진단서 제목 색상 */
+}
+
+.certificate p {
+    margin: 15px 0;
+    font-size: 1.5rem;
+    color: #333;
 }
